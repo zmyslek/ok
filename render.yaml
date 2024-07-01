@@ -1,12 +1,12 @@
 services:
   - type: web
     name: my-ajax-project
+    env: docker
     repo: https://github.com/zmyslek/ok
     branch: main
     dockerfilePath: Dockerfile
     buildCommand: ""
     startCommand: php artisan serve --host 0.0.0.0 --port $PORT
-    runtime: docker
     envVars:
       - key: APP_ENV
         value: production
