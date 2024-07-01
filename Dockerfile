@@ -6,7 +6,6 @@ WORKDIR /var/www/html
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    build-essential \
     libpng-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
@@ -30,7 +29,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY . .
 
 # Install PHP dependencies
-RUN composer install --no-scripts --no-autoloader
+RUN composer install
 
 # Install Node.js dependencies
 RUN npm install
@@ -43,4 +42,4 @@ RUN npm run build
 
 # Expose port 80 and start the app
 EXPOSE 80
-CMD ["php-fpm"]
+CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80"]
